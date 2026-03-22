@@ -131,8 +131,6 @@ body.dark .theme-opt.active {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 .two-col {
@@ -653,6 +651,7 @@ body.dark .fin-h-value {
   color: #64748b;
 }
 
+/* ── CHART & FILTER BAR ───────────────────────────────────────────────────── */
 .chart-card {
   background: #fff;
   border-radius: 12px;
@@ -850,18 +849,10 @@ body.dark .f-btn[class*="active"] {
   transition: color 0.3s;
 }
 
-body.dark #donut-num {
-  color: #f1f5f9;
-}
-
 #donut-lbl {
   font-size: 10px;
   font-weight: 600;
   color: #64748b;
-}
-
-body.dark #donut-lbl {
-  color: #cbd5e1;
 }
 
 .dl-list {
