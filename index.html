@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reclevo SWAM — Plant Manager Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  </head>
+  <body>
+    <div class="topbar">
+      <div>
+        <div class="t-name">Pundalik Tilve</div>
+        <div class="t-sub">Plant Manager · Reclevo SWAM · Fri Mar 20, 2026</div>
+      </div>
+      <div class="topbar-right">
+        <div class="theme-pill">
+          <button
+            class="theme-opt active"
+            id="opt-light"
+            onclick="setTheme('light')"
+          >
+            Light
+          </button>
+          <button class="theme-opt" id="opt-dark" onclick="setTheme('dark')">
+            Dark
+          </button>
+        </div>
+        <div class="live-badge">
+          <div class="pulse"></div>
+          Live
+        </div>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="section-label">
+        <span class="section-label-text">Operations Overview</span>
+        <span class="section-label-badge">Today · Mar 20</span>
+        <div class="section-label-line"></div>
+      </div>
+
+      <div class="two-col">
+        <div class="col">
+          <div class="card">
+            <div
+              class="card-title"
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              Warnings &amp; Emergencies
+              <span style="font-size: 11px; font-weight: 500; color: #64748b"
+                >3 active</span
+              >
+            </div>
+
+            <div class="alert-item alert-critical">
+              <div class="feed-bar"></div>
+              <div style="flex: 1">
+                <div class="a-title">Forklift near-miss · Zone B</div>
+                <div class="a-meta">
+                  <span>2 min ago</span>
+                  <span class="feed-tag">Critical</span>
+                  <span class="feed-tag">Zone B</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="alert-item alert-high">
+              <div class="feed-bar"></div>
+              <div style="flex: 1">
+                <div class="a-title">Attendance critical — 22.9%</div>
+                <div class="a-meta">
+                  <span>9:00 AM</span>
+                  <span class="feed-tag">High</span>
+                  <span class="feed-tag">Workforce</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="alert-item alert-medium">
+              <div class="feed-bar"></div>
+              <div style="flex: 1">
+                <div class="a-title">4 assets missing · Zone C</div>
+                <div class="a-meta">
+                  <span>Yesterday</span>
+                  <span class="feed-tag">Medium</span>
+                  <span class="feed-tag">Zone C</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-row">
+            <div class="card">
+              <div class="card-title">Tasks Breakdown</div>
+              <div style="display: flex; align-items: center; gap: 20px">
+                <div
+                  style="
+                    position: relative;
+                    width: 110px;
+                    height: 110px;
+                    flex-shrink: 0;
+                  "
+                >
+                  <canvas
+                    id="donutChart"
+                    width="110"
+                    height="110"
+                    style="width: 110px; height: 110px"
+                  ></canvas>
+                  <div
+                    style="
+                      position: absolute;
+                      inset: 0;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                      justify-content: center;
+                      pointer-events: none;
+                    "
+                  >
+                    <div
+                      id="donut-num"
+                      style="font-size: 20px; font-weight: 700; color: #1e293b"
+                    >
+                      10
+                    </div>
+                    <div
+                      id="donut-lbl"
+                      style="font-size: 10px; font-weight: 600; color: #64748b"
+                    >
+                      tasks
+                    </div>
+                  </div>
+                </div>
+                <div style="flex: 1">
+                  <div class="dl-row">
+                    <span class="dl-dot" style="background: #dc2626"></span>
+                    <span class="dl-label">Overdue</span>
+                    <span class="dl-count">3</span>
+                  </div>
+                  <div class="dl-row">
+                    <span class="dl-dot" style="background: #f59e0b"></span>
+                    <span class="dl-label">Pending</span>
+                    <span class="dl-count">7</span>
+                  </div>
+                  <div class="dl-row">
+                    <span class="dl-dot" style="background: #22c55e"></span>
+                    <span class="dl-label">Done</span>
+                    <span class="dl-count">0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Attendance</div>
+              <div class="att-head">
+                <span class="att-num">14</span>
+                <span class="att-of">/ 61</span>
+                <span class="att-trend">↓ 22.9%</span>
+              </div>
+              <div class="att-sub">Present today</div>
+              <div class="spark-wrap">
+                <div class="spark-col">
+                  <div class="spark-pct">85%</div>
+                  <div class="spark-bar-outer">
+                    <div
+                      class="spark-bar-inner sb-ok"
+                      style="height: 85%"
+                    ></div>
+                  </div>
+                  <div class="spark-day">M</div>
+                </div>
+                <div class="spark-col">
+                  <div class="spark-pct">80%</div>
+                  <div class="spark-bar-outer">
+                    <div
+                      class="spark-bar-inner sb-ok"
+                      style="height: 80%"
+                    ></div>
+                  </div>
+                  <div class="spark-day">T</div>
+                </div>
+                <div class="spark-col">
+                  <div class="spark-pct">68%</div>
+                  <div class="spark-bar-outer">
+                    <div
+                      class="spark-bar-inner sb-ok"
+                      style="height: 68%"
+                    ></div>
+                  </div>
+                  <div class="spark-day">W</div>
+                </div>
+                <div class="spark-col">
+                  <div class="spark-pct">72%</div>
+                  <div class="spark-bar-outer">
+                    <div
+                      class="spark-bar-inner sb-ok"
+                      style="height: 72%"
+                    ></div>
+                  </div>
+                  <div class="spark-day">T</div>
+                </div>
+                <div class="spark-col">
+                  <div class="spark-pct spark-pct-crit">23%</div>
+                  <div class="spark-bar-outer">
+                    <div
+                      class="spark-bar-inner sb-crit"
+                      style="height: 23%"
+                    ></div>
+                  </div>
+                  <div class="spark-day">F</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Carbon Offset</div>
+            <div class="carbon-top">
+              <div>
+                <div class="carbon-val">142 kg</div>
+                <div class="carbon-unit">CO₂ equivalent offset</div>
+              </div>
+              <div style="text-align: right">
+                <div class="carbon-target">Target: 200 kg</div>
+                <div class="carbon-pct">71% achieved</div>
+              </div>
+            </div>
+            <div class="carbon-bar-track">
+              <div class="carbon-bar-fill" style="width: 71%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <div class="card-title">Waste Operations</div>
+            <div class="waste-grid">
+              <div class="waste-box">
+                <div class="waste-lbl">Solid Waste</div>
+                <div class="waste-val">187 kg</div>
+                <div class="waste-tgt">
+                  <span>Target 500 kg</span>
+                  <span style="font-weight: 700; color: #475569">37%</span>
+                </div>
+                <div class="pt">
+                  <div class="pb pb-solid" style="width: 37.4%"></div>
+                </div>
+                <div class="waste-delta-row">
+                  <div class="waste-note">
+                    <div class="log-dot"></div>
+                    Last log 11:20 AM
+                  </div>
+                  <div class="delta delta-up">↑ 23 kg vs yesterday</div>
+                </div>
+              </div>
+
+              <div class="waste-box">
+                <div class="waste-lbl">Liquid Waste</div>
+                <div class="waste-val">2,640 L</div>
+                <div class="waste-tgt">
+                  <span>Target 8,000 L</span>
+                  <span style="font-weight: 700; color: #475569">33%</span>
+                </div>
+                <div class="pt">
+                  <div class="pb pb-liquid" style="width: 33%"></div>
+                </div>
+                <div class="waste-delta-row">
+                  <div class="waste-note">
+                    <div class="log-dot"></div>
+                    Last log 10:45 AM
+                  </div>
+                  <div class="delta delta-down">↓ 310 L vs yesterday</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Financial Overview</div>
+
+            <div class="fin-kpi-row">
+              <div class="fin-h">
+                <div class="fin-h-label">Total Income</div>
+                <div class="fin-h-value">₹2.4L</div>
+                <div class="fin-h-sub">
+                  <span class="delta-up">↑ 8.2%</span> vs last month
+                </div>
+              </div>
+              <div class="fin-h">
+                <div class="fin-h-label">Total Expense</div>
+                <div class="fin-h-value">₹1.8L</div>
+                <div class="fin-h-sub">
+                  <span class="delta-down">↑ 3.1%</span> vs last month
+                </div>
+              </div>
+              <div class="fin-h">
+                <div class="fin-h-label">Net Margin</div>
+                <div class="fin-h-value">₹0.6L</div>
+                <div class="fin-h-sub">
+                  <span class="delta-up">25%</span> of income
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-bar">
+              <span class="filter-label">Range</span>
+              <button
+                class="f-btn active-time"
+                id="t-1W"
+                onclick="setTime('1W', this)"
+              >
+                1W
+              </button>
+              <button class="f-btn" id="t-1M" onclick="setTime('1M', this)">
+                1M
+              </button>
+              <button class="f-btn" id="t-6M" onclick="setTime('6M', this)">
+                6M
+              </button>
+              <button class="f-btn" id="t-1Y" onclick="setTime('1Y', this)">
+                1Y
+              </button>
+              <div class="filter-sep"></div>
+              <span class="filter-label">View</span>
+              <button
+                class="f-btn active-all"
+                id="v-all"
+                onclick="setView('all', this)"
+              >
+                All
+              </button>
+              <button
+                class="f-btn"
+                id="v-income"
+                onclick="setView('income', this)"
+              >
+                Income
+              </button>
+              <button
+                class="f-btn"
+                id="v-expense"
+                onclick="setView('expense', this)"
+              >
+                Expense
+              </button>
+              <button
+                class="f-btn"
+                id="v-margin"
+                onclick="setView('margin', this)"
+              >
+                Margin
+              </button>
+            </div>
+
+            <div
+              style="
+                display: flex;
+                justify-content: flex-end;
+                margin-bottom: 8px;
+              "
+            >
+              <div class="chart-legend" id="chart-legend"></div>
+            </div>
+
+            <div style="position: relative; width: 100%; height: 200px">
+              <canvas id="finChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>
