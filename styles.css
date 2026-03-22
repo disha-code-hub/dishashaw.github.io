@@ -90,7 +90,6 @@ body.dark .t-name {
   }
 }
 
-/* ── THEME TOGGLE ─────────────────────────────────────────────────────────── */
 .theme-pill {
   display: flex;
   align-items: center;
@@ -125,7 +124,6 @@ body.dark .theme-opt.active {
   color: #f1f5f9;
 }
 
-/* ── PAGE ─────────────────────────────────────────────────────────────────── */
 .page {
   padding: 10px 12px;
   display: flex;
@@ -133,7 +131,6 @@ body.dark .theme-opt.active {
   gap: 6px;
 }
 
-/* ── SECTION LABEL ────────────────────────────────────────────────────────── */
 .section-label {
   display: flex;
   align-items: center;
@@ -182,8 +179,6 @@ body.dark .section-label-badge {
   border-color: #475569;
 }
 
-/* ── TWO-COLUMN GRID ──────────────────────────────────────────────────────── */
-/* Mobile: single column. Tablet+: two equal columns */
 .two-col {
   display: grid;
   grid-template-columns: 1fr;
@@ -193,11 +188,10 @@ body.dark .section-label-badge {
 @media (min-width: 900px) {
   .two-col {
     grid-template-columns: 1fr 1fr;
-    align-items: stretch; /* columns stretch to match each other's height */
+    align-items: stretch;
   }
 }
 
-/* ── COLUMN ───────────────────────────────────────────────────────────────── */
 .col {
   display: flex;
   flex-direction: column;
@@ -208,13 +202,12 @@ body.dark .section-label-badge {
   .col {
     gap: 12px;
   }
-  /* Carbon Offset (last card in left col) grows to fill remaining space */
+
   .col:first-child .card:last-child {
     flex: 1;
   }
 }
 
-/* ── SPLIT ROW (Tasks + Attendance) ─────────────────────────────────────────*/
 .split-row {
   display: grid;
   grid-template-columns: 1fr;
@@ -227,7 +220,6 @@ body.dark .section-label-badge {
   }
 }
 
-/* ── CARD ─────────────────────────────────────────────────────────────────── */
 .card {
   background: #fff;
   border-radius: 12px;
@@ -268,7 +260,6 @@ body.dark .card-title {
   }
 }
 
-/* ── ALERTS FEED ──────────────────────────────────────────────────────────── */
 .alert-item {
   display: flex;
   gap: 10px;
@@ -335,24 +326,22 @@ body.dark .feed-tag {
   color: #94a3b8;
 }
 
-/* ── TASKS BREAKDOWN ──────────────────────────────────────────────────────── */
 .tasks-layout {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-/* Donut — fixed size set in CSS, not JS */
 .donut-wrap {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 118px;
+  height: 118px;
   flex-shrink: 0;
 }
 
 .donut-wrap canvas {
-  width: 140px !important;
-  height: 140px !important;
+  width: 118px !important;
+  height: 118px !important;
 }
 
 .donut-center {
@@ -366,13 +355,13 @@ body.dark .feed-tag {
 }
 
 #donut-num {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: #1e293b;
   transition: color 0.3s;
 }
 #donut-lbl {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   color: #64748b;
 }
@@ -385,21 +374,21 @@ body.dark .feed-tag {
 .dl-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 14px;
+  gap: 5px;
+  margin-bottom: 11px;
 }
 .dl-row:last-child {
   margin-bottom: 0;
 }
 
 .dl-dot {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 .dl-label {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #1e293b;
   transition: color 0.3s;
@@ -409,7 +398,7 @@ body.dark .dl-label {
 }
 
 .dl-count {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: #0f172a;
   transition: color 0.3s;
@@ -421,19 +410,18 @@ body.dark .dl-count {
 
 @media (min-width: 900px) {
   .donut-wrap {
-    width: 150px;
-    height: 150px;
+    width: 124px;
+    height: 124px;
   }
   .donut-wrap canvas {
-    width: 150px !important;
-    height: 150px !important;
+    width: 124px !important;
+    height: 124px !important;
   }
   #donut-num {
-    font-size: 26px;
+    font-size: 22px;
   }
 }
 
-/* ── ATTENDANCE SPARK BARS ────────────────────────────────────────────────── */
 .att-head {
   display: flex;
   align-items: baseline;
@@ -443,7 +431,7 @@ body.dark .dl-count {
 }
 
 .att-num {
-  font-size: 42px;
+  font-size: 32px;
   font-weight: 700;
   color: #1e293b;
   line-height: 1;
@@ -454,20 +442,20 @@ body.dark .att-num {
 }
 
 .att-of {
-  font-size: 16px;
+  font-size: 14px;
   color: #64748b;
   font-weight: 500;
 }
 .att-sub {
-  font-size: 12px;
+  font-size: 11px;
   color: #64748b;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .att-trend {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  padding: 3px 9px;
+  padding: 2px 8px;
   border-radius: 4px;
   background: #fef2f2;
   color: #dc2626;
@@ -477,8 +465,8 @@ body.dark .att-num {
 .spark-wrap {
   display: flex;
   align-items: flex-end;
-  gap: 6px;
-  height: 100px;
+  gap: 5px;
+  height: 82px;
 }
 
 .spark-col {
@@ -525,7 +513,6 @@ body.dark .att-num {
   text-align: center;
 }
 
-/* ── WASTE OPERATIONS ─────────────────────────────────────────────────────── */
 .waste-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -628,7 +615,6 @@ body.dark .pt {
   gap: 4px;
 }
 
-/* ── SHARED DELTA INDICATORS ──────────────────────────────────────────────── */
 .delta {
   font-size: 10px;
   font-weight: 600;
@@ -640,7 +626,6 @@ body.dark .pt {
   color: #dc2626;
 }
 
-/* ── CARBON OFFSET ────────────────────────────────────────────────────────── */
 .carbon-top {
   display: flex;
   justify-content: space-between;
@@ -692,7 +677,6 @@ body.dark .carbon-bar-track {
   border-radius: 100px;
 }
 
-/* ── FINANCIAL KPIs ───────────────────────────────────────────────────────── */
 .fin-kpi-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -747,7 +731,6 @@ body.dark .fin-h-value {
   color: #64748b;
 }
 
-/* ── FILTER BAR ───────────────────────────────────────────────────────────── */
 .filter-bar {
   display: flex;
   align-items: center;
@@ -824,7 +807,6 @@ body.dark .f-btn[class*="active"] {
   border-color: #475569;
 }
 
-/* ── CHART CANVAS ─────────────────────────────────────────────────────────── */
 .chart-legend {
   display: flex;
   gap: 10px;
@@ -833,7 +815,6 @@ body.dark .f-btn[class*="active"] {
   flex-wrap: wrap;
 }
 
-/* Fixed height — no flex magic, always stable */
 .chart-canvas-wrap {
   position: relative;
   width: 100%;
