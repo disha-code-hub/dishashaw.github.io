@@ -41,19 +41,7 @@ const CHART_DATA = {
     expense: [150000, 155000, 162000, 158000, 174000, 180000],
   },
   "1Y": {
-    labels: [
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-      "Jan",
-      "Feb",
-      "Mar",
+    labels: ["Apr","May","Jun", "Jul","Aug","Sep","Oct","Nov","Dec","Jan","Feb", "Mar",
     ],
     income: [
       160000, 165000, 170000, 172000, 175000, 178000, 180000, 195000, 210000,
@@ -66,7 +54,6 @@ const CHART_DATA = {
   },
 };
 
-// Line colors — single source of truth used by both datasets and the legend
 const LINE_COLORS = {
   Income: "#2563eb",
   Expense: "#dc2626",
@@ -82,7 +69,7 @@ function getMargin(timeKey) {
 }
 
 function buildDatasets() {
-  const { income, expense, labels } = CHART_DATA[curTime];
+  const { income, expense } = CHART_DATA[curTime];
   const margin = getMargin(curTime);
 
   const base = {
@@ -122,21 +109,21 @@ function buildDatasets() {
     pointBackgroundColor: LINE_COLORS["Net Margin"],
   };
 
-  const map = {
+  const viewMap = {
     income: [incomeDs],
     expense: [expenseDs],
     margin: [marginDs],
     all: [incomeDs, expenseDs, marginDs],
   };
 
-  return map[curView];
+  return viewMap[curView];
 }
 
 function updateLegend() {
   document.getElementById("chart-legend").innerHTML = finChart.data.datasets
     .map(
-      ({ label }) => `
-      <span style="display:flex;align-items:center;gap:5px">
+      ({ label }) =>
+        `<span style="display:flex;align-items:center;gap:5px">
         <span style="display:inline-block;width:12px;height:2px;background:${LINE_COLORS[label]};border-radius:2px"></span>
         <span style="font-size:11px;font-weight:600;color:${LINE_COLORS[label]}">${label}</span>
       </span>`,
@@ -160,10 +147,8 @@ const crosshairPlugin = {
   afterDraw(chart) {
     const x = chart._crosshairX;
     if (!x) return;
-
     const { top, bottom, left, right } = chart.chartArea;
     if (x < left || x > right) return;
-
     const ctx = chart.ctx;
     ctx.save();
     ctx.beginPath();
@@ -210,7 +195,11 @@ const finChart = new Chart(document.getElementById("finChart"), {
     scales: {
       x: {
         grid: { display: false },
-        ticks: { color: tickColor, font: { size: 11, weight: "500" } },
+        ticks: {
+          color: tickColor,
+          font: { size: 11, weight: "500" },
+          maxRotation: 0,
+        },
         border: { display: false },
       },
       y: {
@@ -219,6 +208,7 @@ const finChart = new Chart(document.getElementById("finChart"), {
           color: tickColor,
           font: { size: 11, weight: "500" },
           callback: (v) => "₹" + (v / 100000).toFixed(1) + "L",
+          maxTicksLimit: 5,
         },
         border: { display: false },
       },
@@ -262,13 +252,27 @@ function refreshChart() {
 const TASK_DATA = {
   counts: [3, 7, 0],
   labels: ["Overdue", "Pending", "Done"],
-  colors: { Overdue: "#b91c1c", Pending: "#92400e", Done: "#15803d" },
+
+  hoverColors: { Overdue: "#b91c1c", Pending: "#92400e", Done: "#15803d" },
 };
 
 const donutNum = document.getElementById("donut-num");
 const donutLbl = document.getElementById("donut-lbl");
 
-new Chart(document.getElementById("donutChart"), {
+function getDonutSize() {
+  if (window.innerWidth >= 1024) return 124;
+  if (window.innerWidth >= 640) return 115;
+  return 105;
+}
+
+const donutSize = getDonutSize();
+const donutCanvas = document.getElementById("donutChart");
+donutCanvas.width = donutSize;
+donutCanvas.height = donutSize;
+donutCanvas.style.width = donutSize + "px";
+donutCanvas.style.height = donutSize + "px";
+
+new Chart(donutCanvas, {
   type: "doughnut",
   data: {
     labels: TASK_DATA.labels,
@@ -299,7 +303,7 @@ new Chart(document.getElementById("donutChart"), {
         const i = elements[0].index;
         const label = TASK_DATA.labels[i];
         donutNum.textContent = TASK_DATA.counts[i];
-        donutNum.style.color = TASK_DATA.colors[label];
+        donutNum.style.color = TASK_DATA.hoverColors[label];
         donutLbl.textContent = label;
       } else {
         donutNum.textContent = "10";
