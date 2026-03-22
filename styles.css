@@ -131,7 +131,7 @@ body.dark .theme-opt.active {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
